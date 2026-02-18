@@ -1,188 +1,209 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Plastic Panic: SDG 14 Life Below Water</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Plastic Panic: SDG 14 Life Below Water</title>
 
-    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600&display=swap" rel="stylesheet">
 
-    <style>
-        /* --- 🎨 THEME & STYLES --- */
-        body {
-            font-family: 'Fredoka', sans-serif;
-            background-color: #122a43; 
-            color: #E0FFFF;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            height: 100vh;
-            overflow: hidden; 
-            user-select: none;
-        }
+	<style>
+		/* --- 🎨 THEME & STYLES --- */
+		.sr-only {
+			position: absolute;
+			width: 1px;
+			height: 1px;
+			padding: 0;
+			margin: -1px;
+			overflow: hidden;
+			clip: rect(0, 0, 0, 0);
+			white-space: nowrap;
+			border-width: 0;
+		}
 
-        header {
-            position: relative; 
-            text-align: center;
-            padding: 20px;
-            background-color: #001f3f; 
-            width: 100%;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            display: flex; 
-            justify-content: center;
-            align-items: center;
-        }
+		body {
+			font-family: 'Fredoka', sans-serif;
+			background-color: #122a43; 
+			color: #E0FFFF;
+			margin: 0;
+			padding: 0;
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			height: 100vh;
+			overflow: hidden; 
+			user-select: none;
+		}
 
-        h1 {
-            color: #4169E1;
-            margin: 0;
-        }
+		header {
+			position: relative; 
+			text-align: center;
+			padding: 20px;
+			background-color: #001f3f; 
+			width: 100%;
+			box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+			display: flex; 
+			justify-content: center;
+			align-items: center;
+		}
 
-        .content-container {
-            width: 95%; 
-            max-width: 1100px; 
-            padding: 20px;
-            background-color: #002B4D; 
-            margin: 20px 0;
-            border-radius: 10px;
-            box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
-            max-height: calc(100vh - 150px);
-            overflow: hidden; 
-        }
+		h1 {
+			color: #4169E1;
+			margin: 0;
+		}
 
-        /* --- HAMBURGER MENU STYLES --- */
-        #menu-button {
-            position: absolute;
-            left: 20px;
-            top: 50%;
-            transform: translateY(-50%);
-            background: none;
-            border: none;
-            color: white;
-            font-size: 30px;
-            cursor: pointer;
-            z-index: 1001; 
-            padding: 5px;
-            line-height: 1;
-        }
-        
-        #side-menu {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 300px;
-            height: 100%;
-            background-color: #001f3f;
-            color: white;
-            padding: 20px;
-            box-shadow: 2px 0 10px rgba(0, 0, 0, 0.5);
-            transform: translateX(-100%); 
-            transition: transform 0.3s ease-in-out;
-            z-index: 1000;
-            overflow-y: auto;
-        }
+		.content-container {
+			width: 95%; 
+			max-width: 1100px; 
+			padding: 20px;
+			background-color: #002B4D; 
+			margin: 20px 0;
+			border-radius: 10px;
+			box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+			max-height: calc(100vh - 150px);
+			overflow: hidden; 
+		}
 
-        #side-menu.open {
-            transform: translateX(0); 
-        }
-        
-        #close-menu {
-            position: absolute;
-            top: 10px;
-            right: 15px;
-            background: none;
-            border: none;
-            color: white;
-            font-size: 30px;
-            cursor: pointer;
-            line-height: 1;
-        }
-        
-        #about-us-content {
-            margin-top: 50px;
-            padding: 0;
-        }
-        
-        #about-us-content h2 {
-            color: #4169E1;
-            border-bottom: 2px solid #005A9C;
-            padding-bottom: 10px;
-        }
-        
-        #about-us-content ul {
-            list-style-type: disc;
-            margin-left: 20px;
-            padding: 0;
-        }
+		/* --- HAMBURGER MENU STYLES --- */
+		#menu-button {
+			position: absolute;
+			left: 20px;
+			top: 50%;
+			transform: translateY(-50%);
+			background: none;
+			border: none;
+			color: white;
+			font-size: 30px;
+			cursor: pointer;
+			z-index: 1001; 
+			padding: 5px;
+			line-height: 1;
+		}
+		
+		#side-menu {
+			position: fixed;
+			top: 0;
+			left: 0;
+			width: 300px;
+			height: 100%;
+			background-color: #001f3f;
+			color: white;
+			padding: 20px;
+			box-shadow: 2px 0 10px rgba(0, 0, 0, 0.5);
+			transform: translateX(-100%); 
+			transition: transform 0.3s ease-in-out;
+			z-index: 1000;
+			overflow-y: auto;
+		}
 
-        /* --- GAME CANVAS & BUTTON STYLES --- */
-        #game-area {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 10px;
-        }
+		#side-menu.open {
+			transform: translateX(0); 
+		}
+		
+		#close-menu {
+			position: absolute;
+			top: 10px;
+			right: 15px;
+			background: none;
+			border: none;
+			color: white;
+			font-size: 30px;
+			cursor: pointer;
+			line-height: 1;
+		}
+		
+		#about-us-content {
+			margin-top: 50px;
+			padding: 0;
+		}
+		
+		#about-us-content h2 {
+			color: #4169E1;
+			border-bottom: 2px solid #005A9C;
+			padding-bottom: 10px;
+		}
+		
+		#about-us-content ul {
+			list-style-type: disc;
+			margin-left: 20px;
+			padding: 0;
+		}
 
-        #game {
-            background: #59a8e8;
-            border: 3px solid #0f2030;
-            border-radius: 10px;
-            box-shadow: 0 0 30px rgba(0,0,0,0.3);
-            cursor: pointer;
-            transition: all 0.3s ease-in-out;
-            display: block; 
-        }
-        
-        #mode-button {
-            margin-top: 10px;
-            padding: 5px 10px;
-            background-color: #FF4500;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-weight: bold;
-            font-family: inherit;
-        }
-        #mode-button:hover {
-            background-color: #CC3700;
-        }
-    </style>
+		/* --- GAME CANVAS & BUTTON STYLES --- */
+		#game-area {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			gap: 10px;
+		}
+
+		#game {
+			background: #59a8e8;
+			border: 3px solid #0f2030;
+			border-radius: 10px;
+			box-shadow: 0 0 30px rgba(0,0,0,0.3);
+			cursor: pointer;
+			transition: all 0.3s ease-in-out;
+			display: block; 
+		}
+		
+		#game:focus {
+			outline: 4px solid #FF4500;
+		}
+
+		#mode-button, #music-button {
+			margin-top: 10px;
+			padding: 5px 10px;
+			color: white;
+			border: none;
+			border-radius: 5px;
+			cursor: pointer;
+			font-weight: bold;
+			font-family: inherit;
+		}
+		#mode-button { background-color: #FF4500; }
+		#mode-button:hover { background-color: #CC3700; }
+		
+		#music-button { background-color: #20B2AA; }
+		#music-button:hover { background-color: #008B8B; }
+	</style>
 </head>
 <body>
+	<div id="sr-announcer" class="sr-only" aria-live="assertive"></div>
 
-    <div id="side-menu">
-        <button id="close-menu">&times;</button>
-        <div id="about-us-content">
-            <h2>🌊 About This Project</h2>
-            <p>This game, Plastic Panic, is an interactive experience supporting Sustainable Development Goal 14: Life Below Water, with a focus on marine conservation and pollution reduction. Dodge the debris to survive!</p>
-            
-            <h3>Team Credits:</h3>
-            <ul>
-                <li><strong>Abijeet Kanha Sanam:</strong> Developer and Assets Maker (Game Logic, Graphics Implementation, Core Code)</li>
-                <li><strong>Aditya:</strong> Explanation Video (Conceptualization and Educational Content Support)</li>
-            </ul>
-        </div>
-    </div>
-    
-    <header>
-        <button id="menu-button">☰</button>
-        <h1>Plastic Panic: SDG 14 - Life Below Water</h1>
-    </header>
+	<div id="side-menu">
+		<button id="close-menu" aria-label="Close Menu">&times;</button>
+		<div id="about-us-content">
+			<h2>🌊 About This Project</h2>
+			<p>This game, Plastic Panic, is an interactive experience supporting Sustainable Development Goal 14: Life Below Water, with a focus on marine conservation and pollution reduction. Dodge the debris to survive!</p>
+			
+			<h3>Team Credits:</h3>
+			<ul>
+				<li><strong>Abijeet Kanha Sanam:</strong> Developer and Assets Maker (Game Logic, Graphics Implementation, Core Code)</li>
+				<li><strong>Aditya:</strong> Explanation Video (Conceptualization and Educational Content Support)</li>
+			</ul>
+		</div>
+	</div>
+	
+	<header>
+		<button id="menu-button" aria-label="Open Menu">☰</button>
+		<h1>Plastic Panic: SDG 14 - Life Below Water</h1>
+	</header>
 
-    <div class="content-container">
+	<div class="content-container">
 
-        <section id="game-area">
-            <h2>🎮 The Ocean Scroller</h2>
-            
-            <button class="mode-toggle" id="mode-button">Go Full Screen</button>
+		<section id="game-area">
+			<h2>🎮 The Ocean Scroller</h2>
+			
+			<div style="display:flex; gap:10px;">
+				<button class="mode-toggle" id="mode-button">Go Full Screen</button>
+				<button class="mode-toggle" id="music-button">Music: ON</button>
+			</div>
 
-            <canvas id="game" width="1000" height="400"></canvas>
-        </section>
-    </div>
-    
+			<canvas id="game" width="1000" height="400" tabindex="0" aria-label="Game Screen. Use Up/Down arrows to move. Avoid obstacles indicated by warning tones. Higher pitch is higher lane."></canvas>
+		</section>
+	</div>
+	
 <script>
 // =======================================================================
 // === JAVASCRIPT LOGIC
@@ -192,24 +213,82 @@
 const canvas = document.getElementById("game");
 const ctx = canvas.getContext("2d");
 const modeButton = document.getElementById('mode-button');
+const musicButton = document.getElementById('music-button');
 const menuButton = document.getElementById('menu-button');
 const closeButton = document.getElementById('close-menu');
 const sideMenu = document.getElementById('side-menu');
+const srAnnouncer = document.getElementById('sr-announcer');
+
+function announce(text) {
+	srAnnouncer.textContent = text;
+}
 
 
 // --- MENU TOGGLE LOGIC ---
 function toggleMenu() {
-    sideMenu.classList.toggle('open');
+	const isOpen = sideMenu.classList.toggle('open');
+	menuButton.setAttribute('aria-expanded', isOpen);
+	if (isOpen) {
+		closeButton.focus();
+	} else {
+		menuButton.focus();
+	}
 }
 
 menuButton.addEventListener('click', toggleMenu);
 closeButton.addEventListener('click', toggleMenu);
 
+musicButton.addEventListener('click', () => {
+	bgMusic.muted = !bgMusic.muted;
+	musicButton.textContent = bgMusic.muted ? "Music: OFF" : "Music: ON";
+	announce(bgMusic.muted ? "Music muted" : "Music enabled");
+});
+
+// --- AUDIO CONTEXT FOR ACCESSIBILITY ---
+let audioCtx;
+const LANE_FREQUENCIES = [880, 660, 440, 220]; // High to Low
+
+function initAudio() {
+	if (!audioCtx) {
+		audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+	}
+	if (audioCtx.state === 'suspended') {
+		audioCtx.resume();
+	}
+}
+
+function playLaneTone(laneIndex, type) {
+	if (!audioCtx) return;
+	
+	const osc = audioCtx.createOscillator();
+	const gain = audioCtx.createGain();
+	
+	osc.frequency.value = LANE_FREQUENCIES[laneIndex];
+	osc.connect(gain);
+	gain.connect(audioCtx.destination);
+	
+	const now = audioCtx.currentTime;
+	
+	if (type === 'move') {
+		osc.type = 'sine';
+		gain.gain.setValueAtTime(0.1, now);
+		gain.gain.exponentialRampToValueAtTime(0.001, now + 0.1);
+		osc.start(now);
+		osc.stop(now + 0.1);
+	} else if (type === 'warning') {
+		osc.type = 'triangle';
+		gain.gain.setValueAtTime(0.05, now);
+		gain.gain.exponentialRampToValueAtTime(0.001, now + 0.3);
+		osc.start(now);
+		osc.stop(now + 0.3);
+	}
+}
+
 
 // --- CORE GAME STATE AND ASSET DEFINITIONS ---
 const fishImg = new Image(); fishImg.src = "fish.png"; 
 const trashSprites = [
-    "trash_can.png", "trash_bag.png", "trash_wrapper.png", "trash_bottle.png"
+	"trash_can.png", "trash_bag.png", "trash_wrapper.png", "trash_bottle.png"
 ].map(src => { const img = new Image(); img.src = src; return img; });
 
 const trashIcon = new Image(); trashIcon.src = "trash_bottle.png"; 
@@ -231,11 +310,11 @@ let currentLane = 1;
 
 const FISH_SIZE = 65;
 let fish = { 
-    x: 70, 
-    y: lanes[currentLane], 
-    targetY: lanes[currentLane], 
-    w: FISH_SIZE, 
-    h: FISH_SIZE 
+	x: 70, 
+	y: lanes[currentLane], 
+	targetY: lanes[currentLane], 
+	w: FISH_SIZE, 
+	h: FISH_SIZE 
 };
 
 let rotation = 0;
@@ -246,40 +325,40 @@ const bubbles = [];
 const ambientBubbles = []; 
 
 function spawnBubble(px, py) { 
-    bubbles.push({ x: px, y: py, r: Math.random() * 3 + 2, alpha: 0.6, speed: 0.6 });
+	bubbles.push({ x: px, y: py, r: Math.random() * 3 + 2, alpha: 0.6, speed: 0.6 });
 }
 function updateBubbles() { 
-    for (let b of bubbles) { b.y -= b.speed; b.alpha -= 0.01; }
-    for (let i = bubbles.length - 1; i >= 0; i--) { if (bubbles[i].alpha <= 0) bubbles.splice(i, 1); }
-    
-    for (let b of ambientBubbles) { b.y -= b.speed; b.alpha -= 0.005; }
-    for (let i = ambientBubbles.length - 1; i >= 0; i--) { 
-        if (ambientBubbles[i].alpha <= 0) ambientBubbles.splice(i, 1);
-    }
-    
-    if (frame % 80 === 0) { 
-        const numBubbles = Math.floor(Math.random() * 4) + 2; 
-        for (let i = 0; i < numBubbles; i++) {
-            ambientBubbles.push({
-                x: Math.random() * canvas.width,
-                y: canvas.height,
-                r: Math.random() * 6 + 4, 
-                alpha: 0.8,
-                speed: Math.random() * 0.5 + 0.3
-            });
-        }
-    }
+	for (let b of bubbles) { b.y -= b.speed; b.alpha -= 0.01; }
+	for (let i = bubbles.length - 1; i >= 0; i--) { if (bubbles[i].alpha <= 0) bubbles.splice(i, 1); }
+	
+	for (let b of ambientBubbles) { b.y -= b.speed; b.alpha -= 0.005; }
+	for (let i = ambientBubbles.length - 1; i >= 0; i--) { 
+		if (ambientBubbles[i].alpha <= 0) ambientBubbles.splice(i, 1);
+	}
+	
+	if (frame % 80 === 0) { 
+		const numBubbles = Math.floor(Math.random() * 4) + 2; 
+		for (let i = 0; i < numBubbles; i++) {
+			ambientBubbles.push({
+				x: Math.random() * canvas.width,
+				y: canvas.height,
+				r: Math.random() * 6 + 4, 
+				alpha: 0.8,
+				speed: Math.random() * 0.5 + 0.3
+			});
+		}
+	}
 }
 
 function drawBubbles() { 
-    [...bubbles, ...ambientBubbles].forEach(b => {
-        ctx.globalAlpha = b.alpha;
-        ctx.beginPath();
-        ctx.arc(b.x, b.y, b.r, 0, Math.PI * 2);
-        ctx.strokeStyle = "white";
-        ctx.stroke();
-    });
-    ctx.globalAlpha = 1;
+	[...bubbles, ...ambientBubbles].forEach(b => {
+		ctx.globalAlpha = b.alpha;
+		ctx.beginPath();
+		ctx.arc(b.x, b.y, b.r, 0, Math.PI * 2);
+		ctx.strokeStyle = "white";
+		ctx.stroke();
+	});
+	ctx.globalAlpha = 1;
 }
 
 let obstacles = [];
@@ -293,10 +372,10 @@ const BASE_SPEED = 4.5;
 const SPEED_INCREASE_RATE = 0.003; 
 
 function getObstacleSpeed() { 
-    // New Speed = BASE + (Timer * Increase Rate)
-    // The timer is the frame count. Since there are 60 frames per second,
-    // the speed increases by 60 * 0.003 = 0.18 units per second.
-    return BASE_SPEED + timer * SPEED_INCREASE_RATE;
+	// New Speed = BASE + (Timer * Increase Rate)
+	// The timer is the frame count. Since there are 60 frames per second,
+	// the speed increases by 60 * 0.003 = 0.18 units per second.
+	return BASE_SPEED + timer * SPEED_INCREASE_RATE;
 }
 
 
@@ -306,267 +385,317 @@ let deathFrame = 0;
 // --- GAME FUNCTIONS ---
 
 function startGame() {
-    if (!musicStarted) {
-        bgMusic.currentTime = 0;
-        bgMusic.play().catch(e => console.log("Music auto-play prevented."));
-        musicStarted = true;
-    }
-    state = "play";
+	initAudio();
+	if (!musicStarted) {
+		bgMusic.currentTime = 0;
+		bgMusic.play().catch(e => console.log("Music auto-play prevented."));
+		musicStarted = true;
+	}
+	state = "play";
+	announce("Game Started. Use Up and Down arrows to dodge.");
 }
 
 function restartGame() {
-    loseSfx.pause();
-    loseSfx.currentTime = 0;
-    bgMusic.currentTime = 0;
-    bgMusic.play().catch(e => console.log("Music play prevented on restart."));
+	loseSfx.pause();
+	loseSfx.currentTime = 0;
+	bgMusic.currentTime = 0;
+	bgMusic.play().catch(e => console.log("Music play prevented on restart."));
 
-    obstacles = [];
-    timer = 0;
-    frame = 0;
-    passedTrash = 0;
-    currentLane = 1;
-    fish.y = lanes[1];
-    fish.targetY = lanes[1]; 
-    rotation = 0;
-    targetRotation = 0;
-    state = "play";
+	obstacles = [];
+	timer = 0;
+	frame = 0;
+	passedTrash = 0;
+	currentLane = 1;
+	fish.y = lanes[1];
+	fish.targetY = lanes[1]; 
+	rotation = 0;
+	targetRotation = 0;
+	state = "play";
+	announce("Game Restarted.");
 }
 
 function collision(a, b) {
-    const shrink = 10;
-    return !(
-        a.x + a.w - shrink < b.x + shrink || a.x + shrink > b.x + b.w - shrink ||
-        a.y + a.h - shrink < b.y + shrink || a.y + shrink > b.y + b.h - shrink
-    );
+	const shrink = 10;
+	return !(
+		a.x + a.w - shrink < b.x + shrink || a.x + shrink > b.x + b.w - shrink ||
+		a.y + a.h - shrink < b.y + shrink || a.y + shrink > b.y + b.h - shrink
+	);
 }
 
 function drawBackground() {
-    bgFarX -= 1;
-    if (bgFarX <= -canvas.width) bgFarX = 0;
-    if (bgFar.complete) {
-        ctx.drawImage(bgFar, bgFarX, 0, canvas.width, canvas.height);
-        ctx.drawImage(bgFar, bgFarX + canvas.width, 0, canvas.width, canvas.height);
-    }
+	bgFarX -= 1;
+	if (bgFarX <= -canvas.width) bgFarX = 0;
+	if (bgFar.complete) {
+		ctx.drawImage(bgFar, bgFarX, 0, canvas.width, canvas.height);
+		ctx.drawImage(bgFar, bgFarX + canvas.width, 0, canvas.width, canvas.height);
+	}
 
-    bgMidX -= 2;
-    if (bgMidX <= -canvas.width) bgMidX = 0;
-    if (bgMid.complete) {
-        ctx.drawImage(bgMid, bgMidX, 0, canvas.width, canvas.height);
-        ctx.drawImage(bgMid, bgMidX + canvas.width, 0, canvas.width, canvas.height);
-    }
+	bgMidX -= 2;
+	if (bgMidX <= -canvas.width) bgMidX = 0;
+	if (bgMid.complete) {
+		ctx.drawImage(bgMid, bgMidX, 0, canvas.width, canvas.height);
+		ctx.drawImage(bgMid, bgMidX + canvas.width, 0, canvas.width, canvas.height);
+	}
 }
 
 function spawnObstacle() {
-    const TRASH_SIZE = 55;
-    obstacles.push({
-        x: canvas.width,
-        lane: Math.floor(Math.random() * lanes.length),
-        w: TRASH_SIZE,
-        h: TRASH_SIZE,
-        speed: getObstacleSpeed(), // Uses dynamically calculated speed
-        sprite: trashSprites[Math.floor(Math.random() * trashSprites.length)]
-    });
+	const TRASH_SIZE = 55;
+	const lane = Math.floor(Math.random() * lanes.length);
+	obstacles.push({
+		x: canvas.width,
+		lane: lane,
+		w: TRASH_SIZE,
+		h: TRASH_SIZE,
+		speed: getObstacleSpeed(), // Uses dynamically calculated speed
+		sprite: trashSprites[Math.floor(Math.random() * trashSprites.length)]
+	});
+}
+
+function playSuccessTone() {
+	if (!audioCtx || bgMusic.muted) return; 
+	const osc = audioCtx.createOscillator();
+	const gain = audioCtx.createGain();
+	osc.frequency.value = 1200; // High pitch ding
+	osc.type = 'sine';
+	osc.connect(gain);
+	gain.connect(audioCtx.destination);
+	gain.gain.setValueAtTime(0.05, audioCtx.currentTime);
+	gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.1);
+	osc.start();
+	osc.stop(audioCtx.currentTime + 0.1);
+}
+
+// Proximity Alarm State
+let lastAlarmTime = 0;
+const ALARM_INTERVAL = 0.15; // Speed of beeping
+
+function checkProximity() {
+	if (state !== "play") return;
+	
+	// Find closest threat in MY lane
+	const threat = obstacles.find(o => 
+		o.lane === currentLane && 
+		o.x > fish.x && 
+		o.x < (fish.x + 400) // Look ahead distance
+	);
+
+	if (threat) {
+		// Play Alarm
+		const now = audioCtx.currentTime;
+		if (now - lastAlarmTime > ALARM_INTERVAL) {
+			playLaneTone(currentLane, 'warning'); // Reuse warning tone as alarm
+			lastAlarmTime = now;
+		}
+	}
 }
 
 function gameOver() {
-    state = "gameover";
-    bgMusic.pause();
-    bgMusic.currentTime = 0;
-    loseSfx.currentTime = 0;
-    loseSfx.play().catch(e => console.log("SFX play prevented."));
+	state = "gameover";
+	bgMusic.pause();
+	bgMusic.currentTime = 0;
+	loseSfx.currentTime = 0;
+	loseSfx.play().catch(e => console.log("SFX play prevented."));
 
-    highestTime = Math.max(highestTime, timer / 60);
-    localStorage.setItem("bestTime", highestTime.toFixed(2));
+	highestTime = Math.max(highestTime, timer / 60);
+	localStorage.setItem("bestTime", highestTime.toFixed(2));
 
-    deathFrame = 0;
+	deathFrame = 0;
+	
+	announce(`Game Over. You survived ${(timer/60).toFixed(0)} seconds. Press Space to restart.`);
 }
 
 function drawFish() {
-    // 1. Interpolate Y position towards the target lane Y for smooth lane changes.
-    fish.y += (fish.targetY - fish.y) * 0.2; 
-    
-    // FIX: Rotation Reset - Slowly return target rotation to 0 when idle.
-    targetRotation *= 0.93; 
+	// 1. Interpolate Y position towards the target lane Y for smooth lane changes.
+	fish.y += (fish.targetY - fish.y) * 0.2; 
+	
+	// FIX: Rotation Reset - Slowly return target rotation to 0 when idle.
+	targetRotation *= 0.93; 
 
-    // 2. Rotation calculation (smoothly rotates towards target rotation)
-    rotation += (targetRotation - rotation) * 0.15; 
-    
-    // 3. Bobbing logic 
-    const bobAmplitude = 5; 
-    const bobSpeed = 0.05;
-    const bobY = fish.y + bobAmplitude * Math.sin(frame * bobSpeed);
+	// 2. Rotation calculation (smoothly rotates towards target rotation)
+	rotation += (targetRotation - rotation) * 0.15; 
+	
+	// 3. Bobbing logic 
+	const bobAmplitude = 5; 
+	const bobSpeed = 0.05;
+	const bobY = fish.y + bobAmplitude * Math.sin(frame * bobSpeed);
 
-    ctx.save();
-    ctx.translate(fish.x + fish.w/2, bobY + fish.h/2);
-    ctx.rotate(rotation);
-    if (fishImg.complete) ctx.drawImage(fishImg, -fish.w/2, -fish.h/2, fish.w, fish.h);
-    ctx.restore();
-    
-    fish.y = bobY; 
+	ctx.save();
+	ctx.translate(fish.x + fish.w/2, bobY + fish.h/2);
+	ctx.rotate(rotation);
+	if (fishImg.complete) ctx.drawImage(fishImg, -fish.w/2, -fish.h/2, fish.w, fish.h);
+	ctx.restore();
+	
+	fish.y = bobY; 
 }
 
 function drawDeath() {
-    deathFrame++;
-    let fallY = fish.y + deathFrame * 1.2;
-    let rotate = rotation + 0.02 * deathFrame;
+	deathFrame++;
+	let fallY = fish.y + deathFrame * 1.2;
+	let rotate = rotation + 0.02 * deathFrame;
 
-    ctx.save();
-    ctx.translate(fish.x + fish.w/2, fallY + fish.h/2);
-    ctx.rotate(rotate);
-    ctx.globalAlpha = Math.max(1 - deathFrame * 0.01, 0);
-    if (fishImg.complete) ctx.drawImage(fishImg, -fish.w/2, -fish.h/2, fish.w, fish.h);
-    ctx.restore();
+	ctx.save();
+	ctx.translate(fish.x + fish.w/2, fallY + fish.h/2);
+	ctx.rotate(rotate);
+	ctx.globalAlpha = Math.max(1 - deathFrame * 0.01, 0);
+	if (fishImg.complete) ctx.drawImage(fishImg, -fish.w/2, -fish.h/2, fish.w, fish.h);
+	ctx.restore();
 
-    if (deathFrame < 20) spawnBubble(fish.x + fish.w, fish.y + fish.h/2);
+	if (deathFrame < 20) spawnBubble(fish.x + fish.w, fish.y + fish.h/2);
 }
 
 
 function drawStartScreen() {
-    ctx.fillStyle = "rgba(0,0,0,0.35)"; ctx.fillRect(0,0,canvas.width,canvas.height);
-    ctx.fillStyle = "white"; ctx.font = "62px Fredoka"; ctx.textAlign = "center";
-    ctx.fillText("Plastic Panic", canvas.width/2, 130);
-    ctx.font = "34px Fredoka"; 
-    ctx.fillText("Press SPACE to Start", canvas.width/2, 280);
+	ctx.fillStyle = "rgba(0,0,0,0.35)"; ctx.fillRect(0,0,canvas.width,canvas.height);
+	ctx.fillStyle = "white"; ctx.font = "62px Fredoka"; ctx.textAlign = "center";
+	ctx.fillText("Plastic Panic", canvas.width/2, 130);
+	ctx.font = "34px Fredoka"; 
+	ctx.fillText("Press SPACE to Start", canvas.width/2, 280);
 }
 
 function drawPauseScreen() {
-    ctx.fillStyle = "rgba(0,0,0,0.4)"; ctx.fillRect(0,0,canvas.width,canvas.height);
-    ctx.fillStyle = "white"; ctx.textAlign = "center"; ctx.font = "50px Fredoka";
-    ctx.fillText("Paused", canvas.width/2, 150);
-    ctx.font = "30px Fredoka"; 
-    ctx.fillText("Press ESC to Resume", canvas.width/2, 210);
+	ctx.fillStyle = "rgba(0,0,0,0.4)"; ctx.fillRect(0,0,canvas.width,canvas.height);
+	ctx.fillStyle = "white"; ctx.textAlign = "center"; ctx.font = "50px Fredoka";
+	ctx.fillText("Paused", canvas.width/2, 150);
+	ctx.font = "30px Fredoka"; 
+	ctx.fillText("Press ESC to Resume", canvas.width/2, 210);
 }
 
 function drawGameOver() {
-    drawDeath();
-    ctx.fillStyle = "white"; ctx.font = "46px Fredoka"; ctx.textAlign = "center";
-    ctx.fillText("Game Over", canvas.width/2, 120);
+	drawDeath();
+	ctx.fillStyle = "white"; ctx.font = "46px Fredoka"; ctx.textAlign = "center";
+	ctx.fillText("Game Over", canvas.width/2, 120);
 
-    ctx.font = "28px Fredoka";
-    ctx.fillText("Time survived: " + (timer/60).toFixed(2) + "s", canvas.width/2, 170);
-    ctx.fillText("Best: " + highestTime.toFixed(2) + "s", canvas.width/2, 210);
+	ctx.font = "28px Fredoka";
+	ctx.fillText("Time survived: " + (timer/60).toFixed(2) + "s", canvas.width/2, 170);
+	ctx.fillText("Best: " + highestTime.toFixed(2) + "s", canvas.width/2, 210);
 
-    ctx.fillText("Trash Dodged: " + passedTrash, canvas.width/2, 250); 
-    
-    ctx.font = "26px Fredoka";
-    ctx.fillText("Press SPACE to restart", canvas.width/2, 330);
+	ctx.fillText("Trash Dodged: " + passedTrash, canvas.width/2, 250); 
+	
+	ctx.font = "26px Fredoka";
+	ctx.fillText("Press SPACE to restart", canvas.width/2, 330);
 }
 
 
 // --- MAIN GAME LOOP ---
 function update() {
-    ctx.clearRect(0,0,canvas.width,canvas.height);
+	ctx.clearRect(0,0,canvas.width,canvas.height);
 
-    drawBackground();
+	drawBackground();
 
-    updateBubbles();
-    drawBubbles();
-    
-    if (state === "start") {
-        drawStartScreen();
-    } else if (state === "pause") {
-        drawPauseScreen();
-    } else if (state === "gameover") {
-        drawGameOver();
-    } else if (state === "play") {
-        
-        drawFish(); 
+	updateBubbles();
+	drawBubbles();
+	
+	if (state === "start") {
+		drawStartScreen();
+	} else if (state === "pause") {
+		drawPauseScreen();
+	} else if (state === "gameover") {
+		drawGameOver();
+	} else if (state === "play") {
+		
+		drawFish(); 
+		checkProximity();
 
-        // CRITICAL: Dynamic obstacle spawn frequency
-        // Start: spawn every 70 frames. At 60 seconds (3600 frames), this drops to 40 frames.
-        const baseSpawnRate = 70;
-        const difficultyFactor = Math.floor(timer / 90); // Increases difficulty every 1.5 seconds (90 frames)
-        const spawnDelay = Math.max(40, baseSpawnRate - difficultyFactor);
-        
-        if (frame % spawnDelay === 0) spawnObstacle();
+		// CRITICAL: Dynamic obstacle spawn frequency
+		// Start: spawn every 70 frames. At 60 seconds (3600 frames), this drops to 40 frames.
+		const baseSpawnRate = 70;
+		const difficultyFactor = Math.floor(timer / 90); // Increases difficulty every 1.5 seconds (90 frames)
+		const spawnDelay = Math.max(40, baseSpawnRate - difficultyFactor);
+		
+		if (frame % spawnDelay === 0) spawnObstacle();
 
-        obstacles.forEach(o => {
-            o.x -= o.speed;
-            o.y = lanes[o.lane];
-            if (o.sprite.complete) {
-                ctx.drawImage(o.sprite, o.x, o.y, 55, 55); 
-            }
+		obstacles.forEach(o => {
+			o.x -= o.speed;
+			o.y = lanes[o.lane];
+			if (o.sprite.complete) {
+				ctx.drawImage(o.sprite, o.x, o.y, 55, 55); 
+			}
 
-            if (collision(fish, o)) {
-                gameOver();
-            }
-            if (o.x + o.w < fish.x && !o.counted) {
-                passedTrash++;
-                o.counted = true;
-            }
-        });
+			if (collision(fish, o)) {
+				gameOver();
+			}
+			if (o.x + o.w < fish.x && !o.counted) {
+				passedTrash++;
+				o.counted = true;
+				playSuccessTone();
+			}
+		});
 
-        obstacles = obstacles.filter(o => o.x + o.w > 0);
+		obstacles = obstacles.filter(o => o.x + o.w > 0);
 
-        // UI
-        timer++;
-        const currentTime = (timer/60).toFixed(2);
-        ctx.fillStyle = "black";
-        ctx.font = "24px Fredoka";
-        ctx.textAlign = "left"; 
-        ctx.fillText("Time: " + currentTime + "s", 20, 30);
-        
-        if (trashIcon.complete) ctx.drawImage(trashIcon, 850, 5, 25, 25); 
-        ctx.textAlign = "left";
-        ctx.fillText(passedTrash, 880, 30); 
+		// UI
+		timer++;
+		const currentTime = (timer/60).toFixed(2);
+		ctx.fillStyle = "black";
+		ctx.font = "24px Fredoka";
+		ctx.textAlign = "left"; 
+		ctx.fillText("Time: " + currentTime + "s", 20, 30);
+		
+		if (trashIcon.complete) ctx.drawImage(trashIcon, 850, 5, 25, 25); 
+		ctx.textAlign = "left";
+		ctx.fillText(passedTrash, 880, 30); 
 
-        ctx.font = "16px Fredoka";
-        ctx.textAlign = "center";
-        ctx.fillText("W/S or ↑/↓ to move | ESC to pause", canvas.width/2, canvas.height - 10);
-    }
+		ctx.font = "16px Fredoka";
+		ctx.textAlign = "center";
+		ctx.fillText("W/S or ↑/↓ to move | ESC to pause", canvas.width/2, canvas.height - 10);
+	}
 
-    frame++;
-    requestAnimationFrame(update);
+	frame++;
+	requestAnimationFrame(update);
 }
 
 
 // --- KEYBOARD AND FULLSCREEN FIXES ---
 document.addEventListener("keydown", (e) => {
-    const keysToCapture = ["ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight", "Space", "KeyW", "KeyS"];
-    
-    if (keysToCapture.includes(e.code)) {
-        e.preventDefault(); 
-    }
-    
-    // ESCAPE KEY LOGIC
-    if (e.code === "Escape") {
-        const isFullscreen = document.fullscreenElement || document.webkitIsFullScreen || document.mozFullScreen || document.msFullscreenElement;
-        
-        if (isFullscreen) { return; } 
-        
-        if (state === "play") {
-            state = "pause";
-            bgMusic.pause();
-        } else if (state === "pause") {
-            state = "play";
-            bgMusic.play().catch(e => {}); 
-        }
-        return; 
-    }
+	const keysToCapture = ["ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight", "Space", "KeyW", "KeyS"];
+	
+	if (keysToCapture.includes(e.code)) {
+		e.preventDefault(); 
+	}
+	
+	// ESCAPE KEY LOGIC
+	if (e.code === "Escape") {
+		const isFullscreen = document.fullscreenElement || document.webkitIsFullScreen || document.mozFullScreen || document.msFullscreenElement;
+		
+		if (isFullscreen) { return; } 
+		
+		if (state === "play") {
+			state = "pause";
+			bgMusic.pause();
+			announce("Paused");
+		} else if (state === "pause") {
+			state = "play";
+			bgMusic.play().catch(e => {}); 
+			announce("Resumed");
+		}
+		return; 
+	}
 
-    if (e.code === "Space" && state === "start") {
-        startGame();
-    }
-    if (e.code === "Space" && state === "gameover") {
-        restartGame();
-    }
-    
-    if (state !== "play") return;
-    
-    if (e.code === "ArrowUp" || e.code === "KeyW") {
-        if (currentLane > 0) {
-            currentLane--;
-            fish.targetY = lanes[currentLane]; 
-            targetRotation = -0.35;
-        }
-    }
-    if (e.code === "ArrowDown" || e.code === "KeyS") {
-        if (currentLane < lanes.length - 1) {
-            currentLane++;
-            fish.targetY = lanes[currentLane]; 
-            targetRotation = 0.35;
-        }
-    }
+	if (e.code === "Space" && state === "start") {
+		startGame();
+	}
+	if (e.code === "Space" && state === "gameover") {
+		restartGame();
+	}
+	
+	if (state !== "play") return;
+	
+	if (e.code === "ArrowUp" || e.code === "KeyW") {
+		if (currentLane > 0) {
+			currentLane--;
+			fish.targetY = lanes[currentLane]; 
+			targetRotation = -0.35;
+			playLaneTone(currentLane, 'move');
+		}
+	}
+	if (e.code === "ArrowDown" || e.code === "KeyS") {
+		if (currentLane < lanes.length - 1) {
+			currentLane++;
+			fish.targetY = lanes[currentLane]; 
+			targetRotation = 0.35;
+			playLaneTone(currentLane, 'move');
+		}
+	}
 });
 
 
@@ -577,39 +706,39 @@ document.addEventListener('mozfullscreenchange', exitHandler);
 document.addEventListener('MSFullscreenChange', exitHandler);
 
 function exitHandler() {
-    const isFullscreen = document.fullscreenElement || document.webkitIsFullScreen || document.mozFullScreen || document.msFullscreenElement;
-    
-    if (!isFullscreen) {
-        modeButton.textContent = 'Go Full Screen';
-        if (state === "play") {
-            state = "pause";
-            bgMusic.pause();
-        }
-    } else {
-        modeButton.textContent = 'Exit Full Screen';
-    }
+	const isFullscreen = document.fullscreenElement || document.webkitIsFullScreen || document.mozFullScreen || document.msFullscreenElement;
+	
+	if (!isFullscreen) {
+		modeButton.textContent = 'Go Full Screen';
+		if (state === "play") {
+			state = "pause";
+			bgMusic.pause();
+		}
+	} else {
+		modeButton.textContent = 'Exit Full Screen';
+	}
 }
 
 modeButton.addEventListener('click', toggleFullscreen);
 
 function toggleFullscreen() {
-    const isInFullScreen = document.fullscreenElement === canvas ||
-                           document.webkitFullscreenElement === canvas ||
-                           document.mozFullscreenElement === canvas ||
-                           document.msFullscreenElement === canvas;
+	const isInFullScreen = document.fullscreenElement === canvas ||
+						   document.webkitFullscreenElement === canvas ||
+						   document.mozFullscreenElement === canvas ||
+						   document.msFullscreenElement === canvas;
 
-    if (isInFullScreen) {
-        if (document.exitFullscreen) { document.exitFullscreen();
-        } else if (document.webkitExitFullscreen) { document.webkitExitFullscreen();
-        } else if (document.msExitFullscreen) { document.msExitFullscreen(); }
-    } else {
-        if (!musicStarted) startGame();
+	if (isInFullScreen) {
+		if (document.exitFullscreen) { document.exitFullscreen();
+		} else if (document.webkitExitFullscreen) { document.webkitExitFullscreen();
+		} else if (document.msExitFullscreen) { document.msExitFullscreen(); }
+	} else {
+		if (!musicStarted) startGame();
 
-        if (canvas.requestFullscreen) { canvas.requestFullscreen();
-        } else if (canvas.webkitRequestFullscreen) { canvas.webkitRequestFullscreen();
-        } else if (canvas.mozRequestFullScreen) { canvas.mozRequestFullScreen();
-        } else if (canvas.msRequestFullscreen) { canvas.msRequestFullscreen(); }
-    }
+		if (canvas.requestFullscreen) { canvas.requestFullscreen();
+		} else if (canvas.webkitRequestFullscreen) { canvas.webkitRequestFullscreen();
+		} else if (canvas.mozRequestFullScreen) { canvas.mozRequestFullScreen();
+		} else if (canvas.msRequestFullscreen) { canvas.msRequestFullscreen(); }
+	}
 }
 
 
